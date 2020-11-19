@@ -1,30 +1,81 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 <div class="container">
-  <%= link_to "Clinika", root_path, class: "navbar-brand", id: "logo" %>
+
+<% if user_signed_in? %>
+    <%= link_to "Clinika", categories_path, class: "navbar-brand", id: "logo" %>
+  <% else %>
+    <%= link_to "Clinika", root_path, class: "navbar-brand", id: "logo" %>
+<% end %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto" id="line">
- 
+        <% if  user_signed_in? && current_user.role == "doctor" %>
           <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Patients
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <% if user_signed_in? %>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">               
+                <%= link_to "Create new recomendation", new_user_session_path, class: "dropdown-item" %>
+              </div>
+          </li> 
+        <% end %>
+       <% if  user_signed_in? && current_user.role == "user" %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Doctors
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <% if user_signed_in? %>
+              <%= link_to "Create new article", new_user_session_path, class: "dropdown-item" %>
+            <% end %>
+          </div>
+         </li> 
+        <% end %>
+
+          <% if  user_signed_in? && current_user.role == "admin" %>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Patients
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">              
+                <%= link_to "Create new recomendation", new_user_session_path, class: "dropdown-item" %>
+              </div>       
+          </li> 
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Doctors
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <% if user_signed_in? %>
                 <%= link_to "Create new article", new_user_session_path, class: "dropdown-item" %>
+              <% end %> 
+            </div>
+          </li> 
+         <% end %>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Category
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <% if user_signed_in? && current_user.role == "admin" %>
+                  <%= link_to "Create new Category", new_category_path, class: "dropdown-item" %>
                 <% end %>
-              <%= link_to 'log in', new_user_session_path, class: "dropdown-item" %>
-             
-          </li>  
-            <% if user_signed_in? %> 
-                    <li class="nav-item">
-                    <%= button_to 'logout',  destroy_user_session_path, class: "nav-link", method: :delete %>
-                    </li>
-                <% end %>         
-   </ul>
+                <%= link_to 'Categories', categories_path, class: "dropdown-item" %>
+              </div>
+               
+           </li>  
+            
+              <% if user_signed_in? %> 
+                  <li class="nav-item">
+                    <%= button_to 'logout',  destroy_user_session_path, class: "nav-link", method: :delete, class: "btn btn-success" %>
+                  </li>
+                 <% else %>  
+                  <%= link_to 'log in', new_user_session_path, class: "nav-link" %>
+              <% end %>
+    </ul>
 
 
     <form class="form-inline my-2 my-lg-0">
@@ -33,5 +84,5 @@
     </form>
  
   </div>
-  </div>
+ </div>
 </nav>

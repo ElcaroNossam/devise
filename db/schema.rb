@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_19_150355) do
+ActiveRecord::Schema.define(version: 2020_11_19_212133) do
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "category_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "category_id"
+  end
+
+  create_table "catigories", force: :cascade do |t|
+    t.string "name"
+  end
 
   create_table "stocks", force: :cascade do |t|
     t.string "ticker"
@@ -18,6 +31,11 @@ ActiveRecord::Schema.define(version: 2020_11_19_150355) do
     t.decimal "last_price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "user_categories", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "categorie_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -30,6 +48,7 @@ ActiveRecord::Schema.define(version: 2020_11_19_150355) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.string "number"
+    t.string "role", default: "user"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
