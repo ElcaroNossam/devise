@@ -60,11 +60,38 @@ html,
   flex: 1 0 auto;
  
 }
+/* footer styling */
+
 
 #sticky-footer {
   flex-shrink: none;
 }
 
+
+footer {
+    margin-top: 45px;
+    padding-top: 5px;
+    border-top: 1px solid #eaeaea;
+    color: #777;
+  }
+  
+  footer a:hover {
+    color: #222;
+  }
+  
+  footer small {
+    float: left;
+  }
+  
+  footer ul {
+    float: right;
+    list-style: none;
+  }
+  
+  footer ul li {
+    float: left;
+    margin-left: 15px;
+  }
 /* Other Classes for Page Styling */
 
 body {
@@ -101,3 +128,13 @@ body {
     color: black; }
     .apple_pagination a:hover, .apple_pagination a:focus {
       text-decoration: underline; }
+/*   my_portfolio */
+      .search-area {
+          padding-top: 50px;
+      }
+      .no-right-padding {
+          padding-right: 0 !important;
+      }
+      .no-left-padding {
+        padding-left: 0 !important;
+    }
