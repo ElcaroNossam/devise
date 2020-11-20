@@ -7,14 +7,14 @@
   </div>
 <% end %>
 
-<h3 class="text-center mt-4">Users</h3>
+<h3 class="text-center mt-4">Doctors</h3>
 
 <div class="flickr_pagination">
-  <%= will_paginate @users, :container => false %>
+  <%= will_paginate @doctors, :container => false %>
 </div>
 
-<%= render 'users/user' %>
+<%= render 'doctors/doctor' %>
 
 <div class="flickr_pagination mb-4">
-  <%= will_paginate @users, :container => false %>
+  <%= will_paginate @doctors, :container => false %>
 </div>

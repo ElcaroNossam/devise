@@ -1,0 +1,23 @@
+
+<h1 class="text-center mt-4"><%= @doctor.name %>'s profile</h1>
+
+    <%= gravatar_for @doctor, size: 200 %>
+
+<% if doctor_signed_in? && @doctor == current_doctor %>
+    <div class="text-center mt-4">
+        <%= link_to "Edit your profile", edit_doctor_path(@doctor), class: "btn btn-outline-info" %>
+    </div>
+<% end %>
+<div class="container">
+<h3 class="text-center mt-4">Categories:</h3>
+<div class="row justify-content-md-center">
+    <div class="col-8 mt-4">
+      <div class="card text-center shadow mb-5 bg-white rounded">
+       <div class="row justify-content-center" >
+        <%= render @categories %>
+       </div>
+      </div>
+    </div>
+   </div>
+ </div>
+   

@@ -5,16 +5,15 @@ class Ability
 
    
 
-    ROLES = %i[user admin doctor] # массив символов [:admin, :manager, :receiver]
+    ROLES = %i[user admin] # массив символов [:admin, :manager, :receiver]
 
   user ||= User.new # guest user (not logged in)
 
   if user.role == "admin"
     can :manage, :all # for RESTful controllers
-  elsif user.role == "doctor"
-    can :manage, [Categorie] # for RESTful controllers
-  elsif user.role "user"
-    can :manage, [Categorie] 
+ 
+  elsif user.role == "user"
+    
     can :read, :all #просматривать разрешено всем
     can :create, :all #создавать всем
     

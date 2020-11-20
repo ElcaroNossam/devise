@@ -1,5 +1,5 @@
 class StocksController < ApplicationController
-    skip_load_and_authorize_resource
+    
     def search
         if params[:stock].present?
             

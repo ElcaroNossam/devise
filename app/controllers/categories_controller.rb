@@ -1,11 +1,12 @@
 class CategoriesController < ApplicationController
 
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:create, :update, :destroy, :edit, :show]
   
   before_action :set_article, only: [:show, :edit, :update, :destroy]
     before_action :require_admin, except: [:index, :show]
 
     def new
+     
       @categorie = Category.new
     end
   
@@ -20,6 +21,8 @@ class CategoriesController < ApplicationController
     end
   
     def edit
+      
+     
      
     end
   
@@ -39,7 +42,7 @@ class CategoriesController < ApplicationController
   
     def show
       
-      @users = @categorie.users.paginate(page: params[:page], per_page: 5)
+      @doctors = @categorie.doctors.paginate(page: params[:page], per_page: 5)
     end
     
     def destroy
@@ -56,7 +59,7 @@ class CategoriesController < ApplicationController
     end
 
     def categorie_params
-      params.require(:category).permit(:name)
+      params.require(:category).permit(:name, doctor_ids: [])
     end
   
     def require_admin

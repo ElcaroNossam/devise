@@ -1,7 +1,7 @@
 class Category < ApplicationRecord
 
-has_many :category_users
-has_many :users, through: :category_users
+has_many :doctor_categories
+has_many :doctors, through: :doctor_categories
 
 validates :name, presence: true, 
                       uniqueness: { case_sensitive: false }, 
