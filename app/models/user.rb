@@ -9,4 +9,5 @@ class User < ApplicationRecord
          validates :number, presence: true, 
                       uniqueness: { case_sensitive: false }, 
                       length: { minimum: 3, maximum: 25 }
+                      ROLES = %i[user admin] # массив символов [:admin, :manager, :receiver]
 end

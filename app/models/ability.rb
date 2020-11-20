@@ -5,8 +5,7 @@ class Ability
 
    
 
-    ROLES = %i[user admin] # массив символов [:admin, :manager, :receiver]
-
+  
   user ||= User.new # guest user (not logged in)
 
   if user.role == "admin"
