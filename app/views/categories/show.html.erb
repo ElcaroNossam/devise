@@ -1,4 +1,4 @@
-<h1 class="text-center mt-4">Categorie: <%= @categorie.name %></h1>
+<h1 class="text-center mt-4">Категория: <%= @categorie.name %></h1>
 
 <% if user_signed_in? && current_user.role == "admin" %>
   <div class="text-center mt-4">
@@ -9,12 +9,5 @@
 
 <h3 class="text-center mt-4">Doctors</h3>
 
-<div class="flickr_pagination">
-  <%= will_paginate @doctors, :container => false %>
-</div>
-
 <%= render 'doctors/doctor' %>
 
-<div class="flickr_pagination mb-4">
-  <%= will_paginate @doctors, :container => false %>
-</div>

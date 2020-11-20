@@ -1,0 +1,28 @@
+<%= render 'shared/errors', obj: @appointment %>
+<%= form_with(model: @appointment, class: "shadow p-3 mb-3 bg-info rounded", local: true) do |f| %>
+ 
+    <div class="form-group row">
+    <%= f.label :data, "Data", class: "col-2 col-form-label text-light" %>
+    <div class="col-10">
+      <%= f.text_field :data, class: "form-control shadow rounded", placeholder: "Enter data and time" %>
+    </div>
+  </div>
+  <div class="form-group row">
+  <%= f.label :content, "Content", class: "col-2 col-form-label text-light" %>
+  <div class="col-10">
+    <%= f.text_field :content, class: "form-control shadow rounded", placeholder: "Do you have problem?" %>
+  </div>
+</div>
+
+  <div class="form-group row">
+  <%= f.label :doctor, class: "col-2 col-form-label text-light" %>
+  <div class="col-10"> 
+    <%= f.collection_select(:doctor_ids, Doctor.all, :id, :name,
+    { prompt: "Make your selection from the list below (can be empty)"}, { multiple: true, size: 3, class: "custom-select shadow rounded" }) %>
+  </div>
+</div>
+
+  <div class="form-group row justify-content-center">
+    <%= f.submit class: "btn btn-outline-light btn-lg" %>
+  </div>
+<% end %>

@@ -29,9 +29,9 @@
             Doctors
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <% if user_signed_in? %>
-              <%= link_to "Create new article", new_user_session_path, class: "dropdown-item" %>
-            <% end %>
+              <%= link_to "Doctors", doctors_path, class: "dropdown-item" %>
+              <%= link_to "Appointments", appointments_path, class: "dropdown-item" %>
+              <%= link_to "Create new appointment", new_appointment_path, class: "dropdown-item" %>
           </div>
          </li> 
         <% end %>
@@ -41,8 +41,9 @@
               <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Patients
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">              
-                <%= link_to "Create new recomendation", new_user_session_path, class: "dropdown-item" %>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">   
+              <%= link_to "Appointments", appointments_path, class: "dropdown-item" %>           
+                <%= link_to "Create new appointment", new_appointment_path, class: "dropdown-item" %>
               </div>       
           </li> 
 
@@ -54,7 +55,7 @@
               
                 <%= link_to "All Doctors", doctors_path, class: "dropdown-item" %>
                 <%= link_to "Create new doctor", new_doctor_path, class: "dropdown-item" %>
-                
+                <%= link_to "Appointments", appointments_path, class: "dropdown-item" %>
             </div>
           </li> 
          <% end %>
@@ -66,8 +67,8 @@
            </a>
            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
              <%= link_to "View your profile", user_path(current_user), class: "dropdown-item" %>
-             <%= link_to "Edit your profile", edit_user_path(current_user), class: "dropdown-item" %>
-             <%= link_to "Delete profile", user_path(current_user), class: "dropdown-item text-danger", method: :delete, data: { confirm: "Are you sure?" } %> 
+             <%= link_to "Edit your profile", edit_user_registration_path(current_user), class: "dropdown-item" %>
+             <%= button_to "Delete profile",  user_registration_path, class: "dropdown-item text-danger", method: :delete, data: { confirm: "Are you sure?" } %> 
            </div>
          </li>
         <% end %>

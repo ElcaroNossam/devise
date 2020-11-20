@@ -4,6 +4,7 @@ class DoctorsController < ApplicationController
    
   
     def show
+      @appointments = @doctor.appointments
       @categories = @doctor.categories.paginate(page: params[:page], per_page: 5)
     end
   

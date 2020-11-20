@@ -11,10 +11,11 @@ class CategoriesController < ApplicationController
     end
   
     def create
+      
       @categorie = Category.new(categorie_params)
       if @categorie.save
-        flash[:notice] = "Categorie was successfully created"
-        redirect_to @categorie
+        flash[:notice] = "Categorie was successfully created but you should chose doctor!"
+        render 'edit'
       else
         render 'new'
       end

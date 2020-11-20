@@ -3,10 +3,12 @@
 
     <%= gravatar_for @doctor, size: 200 %>
 
-<% if doctor_signed_in? && @doctor == current_doctor %>
+<% if user_signed_in? && current_user.role = "admin" %>
     <div class="text-center mt-4">
-        <%= link_to "Edit your profile", edit_doctor_path(@doctor), class: "btn btn-outline-info" %>
-    </div>
+        <%= link_to "Edit this profile", edit_doctor_path(@doctor), class: "btn btn-outline-info" %>
+        <%= link_to "Delete user", doctor_path(@doctor), class: "btn btn-outline-danger", method: :delete,
+        data: {confirm: "Are you sure you want to delete the user account and all associated articles?"} %>
+        </div>
 <% end %>
 <div class="container">
 <h3 class="text-center mt-4">Categories:</h3>
@@ -20,4 +22,9 @@
     </div>
    </div>
  </div>
+ <div class="container">
+     <h3 class="text-center mt-4">Appointments:</h3>
+     <%= render @appointments %>
+ </div>
+  
    

@@ -1,4 +1,4 @@
-<h1 class="text-center mt-4">Alpha Bloggers</h1>
+<h1 class="text-center mt-4">Doctors</h1>
 
 <div class="flickr_pagination">
   <%= will_paginate @users, :container => false %>
@@ -12,12 +12,16 @@
           <div class="card-header font-italic">
             <%= link_to doctor.name, doctor %>
           </div>
+          <%= link_to "Записаться на приём", new_appointment_path, class: "text-warning" %>
           <div class="card-body">
             <h5 class="card-title">
               <%= link_to gravatar_for(doctor, size: 150), doctor %>
             </h5>
-            <p class="card-text"><%= pluralize(doctor.categories.count, "category") %></p>
-            <%= link_to "View profile", doctor, class: "btn btn-outline-success" %>
+            <div class="row justify-content-center" >
+              <%= render doctor.categories %>
+           </div>
+           
+            <%= link_to "View profile", doctor, class: "btn btn-outline-success mt-2" %>
             <% if doctor_signed_in? %>
               <% if doctor == current_doctor %>
                 <%= link_to "Edit profile", edit_doctor_path(doctor), class: "btn btn-outline-info" %>

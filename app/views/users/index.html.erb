@@ -23,7 +23,7 @@
                 <%= link_to "Delete user", user_path(user), class: "btn btn-outline-danger", method: :delete,
                 data: {confirm: "Are you sure you want to delete the user account and all associated articles?"} %>
              <% if current_user.role == "user" %>
-                 <%= link_to "View profile", user, class: "btn btn-outline-success" %>
+                 <%= link_to "View profile", user_path(user), class: "btn btn-outline-success" %>
                  <%= link_to "Edit profile", edit_user_path(user), class: "btn btn-outline-info" %>          
               <% end %>                        
             <% end %>

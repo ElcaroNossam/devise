@@ -6,19 +6,16 @@
     <div class="col-8 mt-4">
       <div class="card text-center shadow mb-5 bg-white rounded">
         <div class="card-header font-italic">
+        <%= gravatar_for doctor, size: 200 %>
         <% if doctor.categories %>
-        by <%= link_to doctor.name, doctor_path(doctor) %>
-        <% doctor.categories.each do |category| %>
-          
-          <div class="mt-2"><%= render category%></div> 
-           
+        <strong> <%= link_to doctor.name, doctor_path(doctor), class: "text-success" %> :  </strong>   
+          <% doctor.categories.each do |category| %>          
+          <div class="mt-2 results-block"><%= render category%></div>           
           <% end %>
           <% end %>
         </div>
-        <div class="card-body">
-          <h5 class="card-title"><%= link_to doctor.name, doctor_path(doctor), class: "text-success" %></h5>
-         
-          <%= link_to "View", doctor_path(doctor), class: "btn btn-outline-success" %>
+        <%= link_to "Записаться на приём", new_appointment_path, class: "text-warning" %>
+        <div class="card-body"> 
           <% if current_user.role == "admin" %>
             <%= link_to "Edit", edit_doctor_path(doctor), class: "btn btn-outline-info" %>
             <%= link_to "Delete", doctor_path(doctor), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
