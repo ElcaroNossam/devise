@@ -9,7 +9,7 @@
           <strong> Дата записи: </strong> <h5 class="card-title"><%= link_to appointment.data, appointment_path(appointment), class: "text-success" %></h5>
             <% if appointment.doctors.count == 0 %>
                  <p class="card-text"><%= pluralize(appointment.doctors.count, "Doctor") %></p>
-           <%else%>
+             <%else%>
                 <% appointment.doctors.each do |doctor| %>
                     <strong> Ваш доктор: </strong> <h5 class="card-title"><%= link_to doctor.name, doctor_path(doctor), class: "text-success" %></h5>
                 <% end %>

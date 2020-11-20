@@ -1,5 +1,5 @@
 class AppointmentsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :update, :destroy, :edit, :show]
+   before_action :authenticate_user!, only: [:create, :update, :destroy, :edit ]
   
   before_action :set_appointment, only: [:show, :edit, :update, :destroy]
   before_action :require_appointment, except: [:index, :show]
@@ -9,7 +9,6 @@ class AppointmentsController < ApplicationController
     end
   
     def create
-      
       @appointment = Appointment.new(appointment_params)
       @appointment.user_id = current_user.id
       if @appointment.save 
@@ -38,7 +37,6 @@ class AppointmentsController < ApplicationController
     end
   
     def show
-      
       @doctors = @appointment.doctors.paginate(page: params[:page], per_page: 5)
     end
     
@@ -61,7 +59,7 @@ class AppointmentsController < ApplicationController
   
     def require_appointment
       if !(user_signed_in? && current_user.role == "user")
-        flash[:alert] = "Only admins can perform that action"
+        flash[:alert] = "Only patients can perform that action"
         redirect_to appointments_path
       end
     end

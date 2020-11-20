@@ -12,7 +12,7 @@
           <div class="card-header font-italic">
             <%= link_to doctor.name, doctor %>
           </div>
-          <%= link_to "Записаться на приём", new_appointment_path, class: "text-warning" %>
+             <%= link_to "Записаться на приём", new_appointment_path, class: "text-warning" %>
           <div class="card-body">
             <h5 class="card-title">
               <%= link_to gravatar_for(doctor, size: 150), doctor %>
@@ -21,15 +21,10 @@
               <%= render doctor.categories %>
            </div>
            
-            <%= link_to "View profile", doctor, class: "btn btn-outline-success mt-2" %>
-            <% if doctor_signed_in? %>
-              <% if doctor == current_doctor %>
-                <%= link_to "Edit profile", edit_doctor_path(doctor), class: "btn btn-outline-info" %>
-              <% end %>
-              <% if current_user.role == "admin" %>
-                <%= link_to "Delete user", doctor_path(doctor), class: "btn btn-outline-danger", method: :delete,
-                data: {confirm: "Are you sure you want to delete the user account and all associated articles?"} %>
-              <% end %>
+            <% if user_signed_in? && current_user.role == "admin"%>
+                    <%= link_to "Edit profile", edit_doctor_path(doctor), class: "btn btn-outline-info mt-2" %>
+                    <%= link_to "Delete user", doctor_path(doctor), class: "btn btn-outline-danger mt-2", method: :delete,
+                    data: {confirm: "Are you sure you want to delete the user account and all associated articles?"} %>
             <% end %>
           </div>
           <div class="card-footer text-muted">
