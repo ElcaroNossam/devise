@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :users
   resources :doctors
-  get 'my_portfolio', to: 'users#my_portfolio'
+  
   
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
