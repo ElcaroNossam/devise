@@ -1,7 +1,7 @@
 class StocksController < ApplicationController
     
 
-    before_action :authenticate_user!, only: [:create, :update, :destroy, :edit ]
+    
     before_action :set_stock, only: [:show, :edit, :update, :destroy]
 
     def search
@@ -29,11 +29,10 @@ class StocksController < ApplicationController
       end
     
       def create
-        @stock = Appointment.new(appointment_params)
-       
+        @stock = Stock.new(stock_params)
         if @stock.save 
-          flash[:notice] = "Appointment was successfully created but you shoud chose doctor"
-          render 'edit'
+          flash[:notice] = "Stock was successfully created"
+            render 'edit'
         else
           render 'new'
         end
@@ -44,8 +43,10 @@ class StocksController < ApplicationController
       end
     
       def update
-        if @stock.update(stock_params)
-          flash[:notice] = "Appointment was updated successfully"
+        if @stock.update(stock_param)
+            @stock.namedoctor = current_doctor.name
+            @stock.save
+          flash[:notice] = "Stock was updated successfully"
           redirect_to @stock
         else
           render 'edit'
@@ -63,8 +64,8 @@ class StocksController < ApplicationController
       def destroy
         @stock.destroy
         
-        flash[:notice] = "This appointment was success destroy!"
-        redirect_to appointments_path
+        flash[:notice] = "This stock was success destroy!"
+        redirect_to stocks_path
       end
   
       private
@@ -74,7 +75,10 @@ class StocksController < ApplicationController
       end
   
       def stock_params
-        params.require(:stock).permit(:user_id, :content, :namedoctor)
+        params.permit(:user_id, :content, :namedoctor)
+      end
+      def stock_param
+        params.require(:stock).permit( :content, :namedoctor, :id)
       end
 
 end

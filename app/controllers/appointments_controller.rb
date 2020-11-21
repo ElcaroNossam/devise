@@ -13,7 +13,7 @@ class AppointmentsController < ApplicationController
       @appointment.user_id = current_user.id
       if @appointment.save 
         flash[:notice] = "Appointment was successfully created but you shoud chose doctor"
-        render 'edit'
+       render 'edit'
       else
         render 'new'
       end
@@ -54,7 +54,7 @@ class AppointmentsController < ApplicationController
     end
 
     def appointment_params
-      params.require(:appointment).permit(:data, :content, :user_id, doctor_ids: [] )
+      params.require(:appointment).permit(:data, :content, :user_id, doctor_ids: [])
     end
   
     def require_appointment

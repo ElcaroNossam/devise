@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   
   def my_portfolio
+    @my_stocks = current_user.stocks
   end
 
   def index
@@ -11,7 +12,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @appointments = Appointment.find_by(user_id: params[:id])
+    @appointments = @user.appointments
   end
 
   private

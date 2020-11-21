@@ -1,0 +1,24 @@
+<% if !@my_stocks.empty? %>
+<div class="row col-10">
+     <table class="table table-border table-hover">
+     <thead class="thead-dark">
+     <tr>
+          <th scope="col">Номер</th>
+          <th scope="col">Имя врача</th>
+          <th scope="col">Рекомендация</th>
+          <th scope="col">Имя пациента</th>
+     </tr>
+     </thead>
+     <tbody>
+     <% @my_stocks.each do |stock| %>
+          <tr>
+               <th scope="row">1</th>
+               <td><%= stock.namedoctor %></td>
+               <td><%= stock.content %></td>
+               <td><%= User.find(stock.user_id).name %></td>
+          </tr>
+     <% end %>
+     </tbody>
+     </table>
+</div>
+<% end %>

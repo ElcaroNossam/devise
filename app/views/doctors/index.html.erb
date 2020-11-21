@@ -1,10 +1,8 @@
 <h1 class="text-center mt-4">Doctors</h1>
-
-<div class="flickr_pagination">
-  <%= will_paginate @users, :container => false %>
-</div>
-
 <div class="container">
+  <div class="flickr_pagination row justify-content-center">
+    <%= will_paginate @doctors, :container => true %>
+  </div>
   <% @doctors.each do |doctor| %>
     <div class="row justify-content-md-center">
       <div class="col-8 mt-4">
@@ -34,4 +32,7 @@
       </div>
     </div>
   <% end %>
+  <div class="flickr_pagination row justify-content-center">
+  <%= will_paginate @doctors, :container => true %>
+</div>
 </div>

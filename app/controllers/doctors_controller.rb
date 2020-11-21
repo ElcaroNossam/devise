@@ -1,6 +1,6 @@
 class DoctorsController < ApplicationController
     before_action :set_doctor, only: [:show, :edit, :update, :destroy]
-    
+   
    
   
     def show
@@ -31,7 +31,7 @@ class DoctorsController < ApplicationController
     def create
       @doctor = Doctor.new(doctor_params)
       if @doctor.save
-        flash[:notice] = "Welcome to the Alpha Blog #{@doctor.name}, you have successfully signed up"
+        flash[:notice] = "Doctor #{@doctor.name}, was created successed!"
         redirect_to categories_path
       else
         render 'new'
@@ -40,8 +40,8 @@ class DoctorsController < ApplicationController
   
     def destroy
       @doctor.destroy
-      session[:doctor_id] = nil if @doctor == current_doctor
-      flash[:notice] = "Account and all associated articles successfully deleted"
+      session[:doctor_id] = nil if current_user.role = "admin"
+      flash[:notice] = "Account successfully deleted"
       redirect_to articles_path
     end
   

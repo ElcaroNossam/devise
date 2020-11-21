@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :doctors
   resources :appointments
   resources :stocks
+    post 'stocks/new', to: 'stocks#create'
   get 'my_portfolio', to: 'users#my_portfolio'
   get 'search_stock', to: 'stocks#search'
   get 'login', to: 'sessions#new'
