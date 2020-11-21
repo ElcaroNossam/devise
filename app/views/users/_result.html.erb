@@ -1,0 +1,10 @@
+<div class="results-block">
+<%= render 'layouts/messages' %>
+</div>
+<% if @stock %>
+    <div class="card card-header popka">
+        <strong> Patient: </strong> <%= @stock.user_id %>
+        <strong> Doctor: </strong> <%= @stock.namedoctor %>
+        <strong> Recomendation: </strong> <%= @stock.content %>             
+    </div>
+<% end %>
