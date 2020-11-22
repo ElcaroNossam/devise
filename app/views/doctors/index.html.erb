@@ -10,7 +10,9 @@
           <div class="card-header font-italic">
             <%= link_to doctor.name, doctor %>
           </div>
+          <% if user_signed_in? %>
              <%= link_to "Записаться на приём", new_appointment_path, class: "text-warning" %>
+             <% end %>
           <div class="card-body">
             <h5 class="card-title">
               <%= link_to gravatar_for(doctor, size: 150), doctor %>
@@ -19,7 +21,7 @@
               <%= render doctor.categories %>
            </div>
            
-            <% if user_signed_in? && current_user.role == "admin"%>
+            <% if user_signed_in? && current_user.has_role?(:admin) %>
                     <%= link_to "Edit profile", edit_doctor_path(doctor), class: "btn btn-outline-info mt-2" %>
                     <%= link_to "Delete user", doctor_path(doctor), class: "btn btn-outline-danger mt-2", method: :delete,
                     data: {confirm: "Are you sure you want to delete the user account and all associated articles?"} %>

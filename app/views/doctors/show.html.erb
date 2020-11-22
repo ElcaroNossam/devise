@@ -3,7 +3,7 @@
 
     <%= gravatar_for @doctor, size: 200 %>
 
-<% if user_signed_in? && current_user.role = "admin" %>
+<% if user_signed_in? && current_user.has_role?(:admin) %>
     <div class="text-center mt-4">
         <%= link_to "Edit this profile", edit_doctor_path(@doctor), class: "btn btn-outline-info" %>
         <%= link_to "Delete user", doctor_path(@doctor), class: "btn btn-outline-danger", method: :delete,
@@ -15,7 +15,6 @@
 <div class="row justify-content-md-center">
     <div class="col-8 mt-4">
       <div class="card text-center shadow mb-5 bg-white rounded">
-      <%= link_to "Записаться на приём", new_appointment_path, class: "text-warning" %>
        <div class="row justify-content-center" >
       
         <%= render @categories %>
@@ -25,9 +24,23 @@
    </div>
  </div>
 
+<div class="row justify-content-center" >
+ <% if  user_signed_in? %> 
+ <% if  @doctor && @doctor.recomend?.count > 2%>
+   <td> <span class="btn btn-danger">
+   <%= link_to  "Свободных запесей нет! Вы можете записаться только на следующую неделю!", new_appointment_path, class: "text-warning" %>
+     </span></td> 
+   <% else %>
+   <td> <span class="btn btn-success">
+   <%= link_to  "Вы можете записатся на любое время!", new_appointment_path, class: "text-dark" %>
+     </span></td> 
+ <% end %>
+ <% end %>
+</div>
+<% if user_signed_in? && current_user || current_doctor == @doctor  %>
  <div class="container">
      <h3 class="text-center mt-4">Записи:</h3>
      <%= render 'appointments/appointment' %>
  </div>
- 
+ <% end %>
    

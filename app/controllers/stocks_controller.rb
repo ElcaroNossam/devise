@@ -31,7 +31,7 @@ class StocksController < ApplicationController
       def create
         @stock = Stock.new(stock_params)
         if @stock.save 
-          flash[:notice] = "Stock was successfully created"
+          flash[:notice] = "Рекомендация создана, выпишите пациенту рецепт!"
             render 'edit'
         else
           render 'new'
@@ -49,7 +49,7 @@ class StocksController < ApplicationController
             @appointment.stock_id = @stock.id
             @appointment.save
             @stock.save
-          flash[:notice] = "Stock was updated successfully"
+          flash[:notice] = "Запись сохранена!"
           redirect_to current_doctor
         else
           render 'edit'
@@ -67,7 +67,7 @@ class StocksController < ApplicationController
       def destroy
         @stock.destroy
         
-        flash[:notice] = "This stock was success destroy!"
+        flash[:notice] = "Запись удалена!"
         redirect_to stocks_path
       end
   

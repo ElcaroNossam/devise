@@ -21,25 +21,11 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
               <%= link_to "Patients", users_path, class: "dropdown-item" %>              
-                <%= link_to "Create new recomendation", new_stock_path, class: "dropdown-item" %>
               </div>
           </li> 
         <% end %>
 
-       <% if  user_signed_in? && current_user.role == "user" %>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Doctors
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "Doctors", doctors_path, class: "dropdown-item" %>
-              <%= link_to "Appointments", appointments_path, class: "dropdown-item" %>
-              <%= link_to "Create new appointment", new_appointment_path, class: "dropdown-item" %>
-          </div>
-         </li> 
-        <% end %>
-
-          <% if  user_signed_in? && current_user.role == "admin" %>
+          <% if  user_signed_in? && current_user.has_role?(:admin) %>
           <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Patients
@@ -62,10 +48,10 @@
           </li> 
          <% end %>
        
-         <% if  current_user && current_user.role = "admin" %>
+         <% if  current_user || current_user && current_user.has_role?(:admin) %>
          <li class="nav-item dropdown">
            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-           <%= "(Admin)" if current_user.role = "admin" %> Profile [<%= current_user.name%>]
+           <%= "(Admin)" if current_user.has_role?(:admin)  %> Profile [<%= current_user.name%>]
            </a>
            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
              <%= link_to "View your profile", user_path(current_user), class: "dropdown-item" %>
@@ -84,7 +70,7 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <%= link_to "View your profile", doctor_path(current_doctor), class: "dropdown-item" %>
             <%= link_to "Edit your profile", edit_doctor_path(current_doctor), class: "dropdown-item" %>
-           <% if current_user && current_user.role = "admin" %>
+           <% if current_user || current_user && current_user.has_role?(:admin)  %>
             <%= link_to "Delete profile", doctor_path(current_doctor), class: "dropdown-item text-danger", method: :delete, data: { confirm: "Are you sure?" } %> 
             <% end %>
             </div>
@@ -92,14 +78,14 @@
        <% end %>
 
           <li class="nav-item dropdown">
-          <% if user_signed_in? && current_user.role == "admin" %>
+          <% if user_signed_in? &&  current_user.has_role?(:admin) %>
               <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Category
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">             
-                  <%= link_to "Create new Category", new_category_path, class: "dropdown-item" %>            
-                <%= link_to 'Categories', categories_path, class: "dropdown-item" %>
-              </div>
+              </a>            
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">                            
+              <%= link_to "Create new Category", new_category_path, class: "dropdown-item" %>                           
+                  <%= link_to 'Categories', categories_path, class: "dropdown-item" %>
+              </div>         
               <% end %>
            </li>  
             
@@ -115,11 +101,31 @@
                  <% end %>
               </ul>
 
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
- 
+  <% if current_user && current_user.has_role?(:admin) && user_signed_in?   %>
+      <div class='search-area'>
+        <h3> Search recomendation </h3>
+        <%= form_tag search_stock_path, remote: true, method: :get do %>
+          <div class="form-group row">
+                <div class="col-sm-9 no-right-padding">
+                      <%= text_field_tag :stock, params[:stock], placeholder: "Введите имя врача...", autofocus: true, class: "form-control form-control-lg" %>
+                </div>
+                <div class="col-cm-3 no-left-padding">
+                      <%= button_tag type: :submit, class: "btn btn-primary" do %>
+                          <%= fa_icon 'search 2x' %>       
+                      <% end %>
+                </div>
+            </div>
+        <% end %>
+       </div>
+    <div id="results">
+   
+      </div>
+  <% else %>
+      <% if doctor_signed_in? ||  user_signed_in?  %>
+      <% else %>
+      <%= link_to "Log In!", new_user_session_path, class: "btn btn-success btn-lg" %>
+      <% end %>
+  <% end %>
   </div>
  </div>
 </nav>

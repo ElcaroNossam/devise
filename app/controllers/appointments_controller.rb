@@ -1,8 +1,8 @@
 class AppointmentsController < ApplicationController
-   before_action :authenticate_user!, only: [:create, :update, :destroy, :edit ]
+   before_action :authenticate_user!, only: [:create, :update, :edit ]
   
   before_action :set_appointment, only: [:show, :edit, :update, :destroy]
-  before_action :require_appointment, except: [:index, :show]
+  before_action  
 
     def new    
       @appointment = Appointment.new
@@ -12,7 +12,7 @@ class AppointmentsController < ApplicationController
       @appointment = Appointment.new(appointment_params)
       @appointment.user_id = current_user.id
       if @appointment.save 
-        flash[:notice] = "Appointment was successfully created but you shoud chose doctor"
+        flash[:notice] = "Запись создана, но вам нужно выбрать имя вашего доктора!"
        render 'edit'
       else
         render 'new'
@@ -25,8 +25,10 @@ class AppointmentsController < ApplicationController
   
     def update
       if @appointment.update(appointment_params)
-        flash[:notice] = "Appointment was updated successfully"
-        redirect_to @appointment
+        flash[:notice] = "Запись создана!"
+        @appointment.doctors.each do |doctor|
+        redirect_to doctor
+        end
       else
         render 'edit'
       end
@@ -41,10 +43,15 @@ class AppointmentsController < ApplicationController
     end
     
     def destroy
-      @appointment.destroy
-      
-      flash[:notice] = "This appointment was success destroy!"
-      redirect_to appointments_path
+      @appointment.destroy 
+      flash[:notice] = "Запись успешно удалена!"
+      if @appointment.doctors.count == 1
+        @appointment.doctors.each do |doctor|
+        redirect_to doctor
+        end
+      else
+        redirect_to doctors_path
+      end
     end
 
     private
@@ -54,12 +61,12 @@ class AppointmentsController < ApplicationController
     end
 
     def appointment_params
-      params.require(:appointment).permit(:data, :content, :user_id, :stock_id, doctor_ids: [])
+      params.require(:appointment).permit(:data, :content, :user_id, :stock_id, :doctor_id, doctor_ids: [])
     end
   
     def require_appointment
-      if !(user_signed_in? && current_user.role == "user")
-        flash[:alert] = "Only patients can perform that action"
+      if !doctor_signed_in? || !user_signed_in? && current_user && current_user.has_role?(:admin)
+        flash[:alert] = "Только после регестрации!"
         redirect_to appointments_path
       end
     end

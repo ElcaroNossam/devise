@@ -2,15 +2,15 @@
 <%= form_with(model: @appointment, class: "shadow p-3 mb-3 bg-info rounded", local: true) do |f| %>
  
   <div class="form-group row">
-    <%= f.label :data, "Data", class: "col-2 col-form-label text-light" %>
+    <%= f.label :data, "Дата и время", class: "col-2 col-form-label text-light" %>
     <div class="col-10">
-      <%= f.text_field :data, class: "form-control shadow rounded", placeholder: "Enter data and time" %>
+      <%= f.text_field :data, class: "form-control shadow rounded", placeholder: "Введите дату и время!" %>
     </div>
   </div>
   <div class="form-group row">
-        <%= f.label :content, "Content", class: "col-2 col-form-label text-light" %>
+        <%= f.label :content, "Причина", class: "col-2 col-form-label text-light" %>
     <div class="col-10">
-        <%= f.text_field :content, class: "form-control shadow rounded", placeholder: "Do you have problem?" %>
+        <%= f.text_field :content, class: "form-control shadow rounded", placeholder: "Что у вас случилось?" %>
     </div>
   </div>
 

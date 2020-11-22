@@ -11,7 +11,7 @@ class CategoriesController < ApplicationController
     def create
       @categorie = Category.new(categorie_params)
       if @categorie.save
-        flash[:notice] = "Categorie was successfully created but you should chose doctor!"
+        flash[:notice] = "Категория созданаб но вам нужно выбрать соответствующих докторов!"
         render 'edit'
       else
         render 'new'
@@ -23,7 +23,7 @@ class CategoriesController < ApplicationController
   
     def update 
       if @categorie.update(categorie_params)
-        flash[:notice] = "Categorie name updated successfully"
+        flash[:notice] = "Категорея обновлена!"
         redirect_to @categorie
       else
         render 'edit'
@@ -40,7 +40,7 @@ class CategoriesController < ApplicationController
     
     def destroy
       @categorie.destroy
-      flash[:notice] = "This categorie was success destroy!"
+      flash[:notice] = "Категория удалена!"
       redirect_to categories_path
     end
 
@@ -56,8 +56,8 @@ class CategoriesController < ApplicationController
     end
   
     def require_admin
-      if !(user_signed_in? && current_user.role == "admin")
-        flash[:alert] = "Only admins can perform that action"
+      if !(user_signed_in? && current_user && current_user.has_role?(:admin))
+        flash[:alert] = "Только для администратора!"
         redirect_to categories_path
       end
     end

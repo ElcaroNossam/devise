@@ -6,10 +6,10 @@ class SessionsController < ApplicationController
       doctor = Doctor.find_by(number: params[:session][:number])
       if doctor && doctor.authenticate(params[:session][:password])
         session[:doctor_id] = doctor.id
-        flash[:notice] = "Logged in successfully"
+        flash[:notice] = "Вы вошли в кабинет как #{doctor.name}."
         redirect_to doctor
       else
-        flash.now[:alert] = "There was something wrong with your login details"
+        flash.now[:alert] = "Аккаунт доктора неможет быть создан!"
         render 'new'
       end
     end

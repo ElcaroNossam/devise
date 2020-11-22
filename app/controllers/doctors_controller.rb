@@ -21,7 +21,7 @@ class DoctorsController < ApplicationController
   
     def update
       if @doctor.update(doctor_params)
-        flash[:notice] = "Your account information was successfully updated"
+        flash[:notice] = "Информация обновлена!"
         redirect_to @doctor
       else
         render 'edit'
@@ -31,7 +31,7 @@ class DoctorsController < ApplicationController
     def create
       @doctor = Doctor.new(doctor_params)
       if @doctor.save
-        flash[:notice] = "Doctor #{@doctor.name}, was created successed!"
+        flash[:notice] = "Аккаунт доктора #{@doctor.name} создан!"
         redirect_to categories_path
       else
         render 'new'
@@ -40,9 +40,9 @@ class DoctorsController < ApplicationController
   
     def destroy
       @doctor.destroy
-      session[:doctor_id] = nil if current_user.role = "admin"
-      flash[:notice] = "Account successfully deleted"
-      redirect_to articles_path
+      session[:doctor_id] = nil if current_user.has_role?(:admin)
+      flash[:notice] = "Аккаунт доктора #{@doctor.name} удалён!"
+      redirect_to doctors_path
     end
   
     private
@@ -56,7 +56,7 @@ class DoctorsController < ApplicationController
   
     def require_doctor
       if current_doctor != @doctor 
-        flash[:alert] = "You can only edit or delete your own account"
+        flash[:alert] = "Только доктор!"
         redirect_to @doctor
       end
     end
