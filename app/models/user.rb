@@ -14,4 +14,7 @@ class User < ApplicationRecord
                       uniqueness: { case_sensitive: false }, 
                       length: { minimum: 3, maximum: 25 }
                       ROLES = %i[user admin] # массив символов [:admin, :manager, :receiver]
+    def recomendes?
+        appointments.where(stock_id: nil) 
+    end
 end

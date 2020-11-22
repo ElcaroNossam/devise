@@ -12,10 +12,11 @@
      <tbody>
      <% @my_stocks.each do |stock| %>
           <tr>
-               <th scope="row">1</th>
+               <th scope="row"><%= stock.id %></th>
                <td><%= stock.namedoctor %></td>
                <td><%= stock.content %></td>
                <td><%= User.find(stock.user_id).name %></td>
+               
           </tr>
      <% end %>
      </tbody>

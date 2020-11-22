@@ -1,5 +1,13 @@
 <div class="row justify-content-center" >
    <div class="row col-10">
+  
+    <% if current_doctor && current_doctor.recomend?.count > 3%>
+      <td> <span class="btn btn-danger">
+          All time bacic
+        </span></td> 
+    <% end %>
+   
+
     <table class="table table-border table-hover">
       <thead class="thead-dark">
        <tr>
@@ -7,24 +15,44 @@
             <th scope="col">Дата</th>
             <th scope="col">Причина</th>
             <th scope="col">Пациент</th>
+            <th scope="col">Phisician</th>
             <th scope="col">Recomendation</th>
        </tr>
        </thead>
       <tbody>
-       <% @appointments.each do |appointment| %>
+      <% @appointments.each do |appointment| %>
             <tr>
                  <th scope="row"><%= appointment.id %></th>
                  <td><%= link_to appointment.data, appointment_path(appointment), class: "badge badge-pill badge-info mr-1" %></td>
                  <td><%= link_to appointment.content, appointment_path(appointment), class: "badge badge-pill badge-info mr-1" %></td>
                  <td><%= link_to appointment.user_id, user_path(User.find(appointment.user_id)), class: "badge badge-pill badge-info mr-1" %></td>
-                <% if current_doctor %>
-                <td><%= link_to 'Create recomendation', new_stock_path(user_id: appointment.user_id), class: "btn btn-primary", method: :create %></td>
+               
+                 <td><% appointment.doctors.each do |doctor| %>
+                    <%= link_to doctor.name, doctor_path(doctor), class: "badge badge-pill badge-info mr-1" %>
+                  <% end %></td>
+               
+               
+                 <% if current_doctor && !current_doctor.stock_already_tracked?(appointment.id) %>
+                <td><%= link_to 'Create recomendation', new_stock_path(user_id: appointment.user_id, appointment_id: appointment.id), class: "btn btn-primary", method: :create %></td>  
+              <% else %> 
+                <% if appointment.stock_id %>
+                      <td> <span class="btn btn-danger">                   
+                      <%= link_to 'Closed', stock_path(Stock.find(appointment.stock_id)) %>
+                        </span></td> 
+                      <% else %>  
+                      <td> <span class="btn btn-success">                   
+                      <%= link_to 'Open', appointment_path(appointment) %>
+                        </span></td> 
+                   <% end %>
               <% end %>
+                
                  </tr>
-      <% end %>
+              
+    
+          <% end %>
     </tbody>
    </table>
-
+   
  </div>
 </div>
       

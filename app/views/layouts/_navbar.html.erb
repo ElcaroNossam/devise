@@ -61,11 +61,11 @@
             </div>
           </li> 
          <% end %>
-
-         <% if  user_signed_in? &&  current_user.role = "admin" %>
+       
+         <% if  current_user && current_user.role = "admin" %>
          <li class="nav-item dropdown">
            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-           <%= "(Admin)" if current_user.role == "admin" %> Profile [<%= current_user.name %>]
+           <%= "(Admin)" if current_user.role = "admin" %> Profile [<%= current_user.name%>]
            </a>
            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
              <%= link_to "View your profile", user_path(current_user), class: "dropdown-item" %>

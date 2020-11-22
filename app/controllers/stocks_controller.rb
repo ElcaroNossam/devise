@@ -45,9 +45,12 @@ class StocksController < ApplicationController
       def update
         if @stock.update(stock_param)
             @stock.namedoctor = current_doctor.name
+            @appointment = Appointment.find(@stock.appointment_id)           
+            @appointment.stock_id = @stock.id
+            @appointment.save
             @stock.save
           flash[:notice] = "Stock was updated successfully"
-          redirect_to @stock
+          redirect_to current_doctor
         else
           render 'edit'
         end
@@ -75,7 +78,7 @@ class StocksController < ApplicationController
       end
   
       def stock_params
-        params.permit(:user_id, :content, :namedoctor)
+        params.permit(:user_id, :content, :namedoctor, :appointment_id)
       end
       def stock_param
         params.require(:stock).permit( :content, :namedoctor, :id)
