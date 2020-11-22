@@ -1,6 +1,6 @@
 <h1 class="text-center mt-4">Категория: <%= @categorie.name %></h1>
 
-<% if user_signed_in? || current_user && current_user.has_role?(:admin) %>
+<% if current_user && current_user.has_role?(:admin) %>
   <div class="text-center mt-4">
     <%= link_to "Edit category name", edit_category_path(@categorie), class: "btn btn-outline-info" %>
     <%= link_to "Delete", category_path(@categorie), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
