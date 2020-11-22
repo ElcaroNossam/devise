@@ -1,8 +1,11 @@
 <h1 class="text-center mt-4">Категории врачей</h1>
 
-<div class="flickr_pagination">
-  <%= will_paginate @categories, :container => false %>
+<div class="container">
+ <div class="flickr_pagination row justify-content-center ">
+  <%= will_paginate @categories, :container => true%>
+  </div>
 </div>
+
 
 <div class="container">
   <% @categories.each do |category| %>
@@ -20,7 +23,9 @@
 </div>
 <div id="results">
 
-    </div>
-<div class="flickr_pagination mb-4">
-  <%= will_paginate @categories, :container => false %>
+</div>
+<div class="container">
+  <div class="flickr_pagination row justify-content-center ">
+    <%= will_paginate @categories, :container => true %>
+  </div>
 </div>

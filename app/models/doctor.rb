@@ -25,7 +25,7 @@ class Doctor < ApplicationRecord
     end
 
     def under_appointment_limit?
-       appointments.count < 5
+       appointments.count > 2 
     end
 
     def recomend?
