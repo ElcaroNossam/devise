@@ -29,4 +29,4 @@ Things you may want to cover:
             <strong> Patient: </strong><%= link_to appointment.user_id, user_path(User.find(appointment.user_id)), class: "badge badge-pill badge-info mr-1" %>
             <% appointment.doctors.each do |doctor| %>
                 <strong> Phisician: </strong><%= link_to doctor.name, doctor_path(doctor), class: "badge badge-pill badge-info mr-1" %>
-            <% end %>
+            <% end %># clinicans
