@@ -28,26 +28,24 @@
    </div>
  </div>
  <% end %>
-<% if @doctor.appointments.count > 0 %>
-<div class="row justify-content-center" >
-<% if  user_signed_in? && current_user && @doctor.recomend?.count > 2 %> 
-   <td> <span class="btn btn-danger text-warning">
-   Свободных запесей нет! 
-     </span></td> 
-<% else %>
-   <td> <span class="btn btn-success">
-   <%= link_to "Вы можете записатся на любое время!",  new_appointment_path, class: "text-dark"  %>
-     </span></td> 
- 
-<% end %>
+
+<div class="row justify-content-center mt-5 mb-5" >
+  <% if  user_signed_in? && current_user && @doctor.recomend?.count > 2 %> 
+    <td> <span class="btn btn-danger text-warning">
+    Свободных запесей нет! 
+      </span></td> 
+  <% else %>
+    <td> <span class="btn btn-success">
+    <%= link_to "Вы можете записатся на любое время!",  new_appointment_path, class: "text-dark"  %>
+      </span></td> 
+  <% end %>
 </div>
 
-<% if user_signed_in? && current_user || current_doctor == @doctor  %>
-
- <div class="container">
-     <h3 class="text-center mt-4">Записи:</h3>
-     <%= render 'appointments/appointment' %>
- </div>
- <% end %>
-   
+<% if @doctor.appointments.count > 0 %>
+    <% if user_signed_in? && current_user || current_doctor == @doctor  %>
+        <div class="container">
+            <h3 class="text-center mt-4">Записи:</h3>
+            <%= render 'appointments/appointment' %>
+        </div>
+    <% end %>
  <% end %>
