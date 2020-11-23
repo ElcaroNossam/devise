@@ -32,8 +32,7 @@ gem 'jquery-rails'
 gem 'will_paginate'
 gem 'cancancan', '~> 1.15'
 gem 'devise-bootstrap-views', '~> 1.0'
-gem 'minitest-reporters'
-gem 'font-awesome-rails'
+
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
@@ -50,6 +49,8 @@ group :development, :test do
   gem 'faker', '>= 0'
   gem "factory_bot"
   gem 'guard'
+  gem 'minitest-reporters'
+  gem 'font-awesome-rails'
 end
 
 group :development do

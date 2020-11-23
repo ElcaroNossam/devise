@@ -26,13 +26,15 @@ class AppointmentsController < ApplicationController
     def update
       if @appointment.update(appointment_params)
         flash[:notice] = "Запись создана!"
-        @appointment.doctors.each do |doctor|
-        redirect_to doctor
+       if @appointment.doctors.count > 1 
+          redirect_to doctors_path
+       else
+          @appointment.doctors.each do |doctor|
+          redirect_to doctor
+         end 
         end
-      else
-        render 'edit'
+       end
       end
-    end
   
     def index
       @appointments = Appointment.paginate(page: params[:page], per_page: 5)

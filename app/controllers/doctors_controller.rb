@@ -32,7 +32,7 @@ class DoctorsController < ApplicationController
       @doctor = Doctor.new(doctor_params)
       if @doctor.save
         flash[:notice] = "Аккаунт доктора #{@doctor.name} создан!"
-        redirect_to categories_path
+        redirect_to doctor_path(@doctor)
       else
         render 'new'
       end
