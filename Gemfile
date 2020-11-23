@@ -50,7 +50,7 @@ group :development, :test do
   gem "factory_bot"
   gem 'guard'
   gem 'minitest-reporters'
-  gem 'font-awesome-rails'
+  
 end
 
 group :development do
@@ -73,6 +73,7 @@ group :test do
   gem 'mini_backtrace'
   gem 'guard-minitest'
   gem 'factory_bot_rails'
+
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
