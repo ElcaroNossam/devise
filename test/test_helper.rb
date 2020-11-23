@@ -1,7 +1,11 @@
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 require 'rails/test_help'
-
+require "active_support/logger"
+require "active_support/tagged_logging"
+require 'minitest/reporters'
+require 'capybara/rails'
+Minitest::Reporters.use!
 class ActiveSupport::TestCase
   # Run tests in parallel with specified workers
   parallelize(workers: :number_of_processors)

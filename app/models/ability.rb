@@ -5,14 +5,11 @@ class Ability
   
   user ||= User.new # guest user (not logged in)
 
-  if user.role == "admin"
+  if user.has_role? :admin
     can :manage, :all # for RESTful controllers
- 
-  elsif user.role == "user"
-    
-    can :read, :all #просматривать разрешено всем
-    can :create, :all #создавать всем
-    
+  elsif user.has_role? :user
+    can :read, [Doctor, Category, Stock] 
+    can :manage, [Appointment]# for RESTful controllers
   end
     # Define abilities for the passed in user here. For example:
     #
