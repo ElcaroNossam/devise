@@ -32,6 +32,7 @@ gem 'jquery-rails'
 gem 'will_paginate'
 gem 'cancancan', '~> 1.15'
 gem 'devise-bootstrap-views', '~> 1.0'
+gem "font-awesome-rails"
 
 
 # Use Active Storage variant
