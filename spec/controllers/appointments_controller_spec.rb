@@ -4,9 +4,8 @@ RSpec.describe AppointmentsController, type: :controller do
 
     # Add this
     login_user
-    login
     let(:valid_attributes) {
-        { :content => "Test title!", :data => "Descrip", :stock_id => 1, :user_id => 1, }
+        { :content => "Test title!", :data => "Descrip", :stock_id => 1, :user_id => 1 }
     }
 
     let(:valid_session) { {} }

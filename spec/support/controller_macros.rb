@@ -17,5 +17,12 @@ module ControllerMacros
         end
     end
     
+    def categories
+      before(:each) do
+          @category = FactoryBot.create(:category)
+          # user.confirm! # Or set a confirmed_at inside the factory. Only necessary if you are using the "confirmable" module  
+        end
+  
+    end
 
     end

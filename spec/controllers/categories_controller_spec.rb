@@ -1,25 +1,25 @@
 require 'rails_helper'
 
-RSpec.describe DoctorsController, type: :controller do
-
+RSpec.describe CategoriesController, type: :controller do
+    
     # Add this
     login
-
+    categories
     let(:valid_attributes) {
-        { :name => "Test title!", :email => "agent@i.ua", :password => "password",  :number => "38051" }
+        { :doctor_id => 1, :category_id => 1 }
     }
 
-    let(:valid_session) { {} }
-
     describe "GET #index" do
+    
         it "returns a success response" do
-            Doctor.create! valid_attributes
-            get :index, params: {}, session: valid_session
+          
+            DoctorCategory.create! valid_attributes
+            get :index, params: {}
 
             # Make sure to swap this as well
             expect(response).to be_successful # be_successful expects a HTTP Status code of 200
             # expect(response).to have_http_status(302) # Expects a HTTP Status code of 302
         end
     end
-end
 
+end

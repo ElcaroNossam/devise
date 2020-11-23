@@ -7,5 +7,8 @@ FactoryBot.define do
       password {"password"}
       password_confirmation { password }
       # Add additional fields as required via your User model
+      after(:create) do |user|
+        user.stocks.update(active: true)
+      end
     end
 end

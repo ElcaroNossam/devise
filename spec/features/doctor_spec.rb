@@ -6,5 +6,7 @@ describe Doctor do
     before(:each) do
       login_url("38051", "password") 
     end
+
+    
   end
  
