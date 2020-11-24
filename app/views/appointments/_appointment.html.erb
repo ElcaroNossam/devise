@@ -35,7 +35,7 @@
                    <td>  <%= link_to 'Open', appointment_path(appointment),  class: "btn btn-success" %>  </td> 
               <% end %>
               <% if user_signed_in? && appointment.stock_id != nil %>
-                  <td>  <%= link_to 'Closed', appointment_path(appointment),  class: "btn btn-danger" %>  </td> 
+                  <td>  <%= link_to 'Closed', stock_path(Stock.find(appointment.stock_id)),  class: "btn btn-danger" %>  </td> 
              <% end %>
             </tr>
           <% end %>
