@@ -8,7 +8,7 @@
        <%= link_to "Delete profile", user_registration_path, class: "btn btn-outline-danger", method: :delete,
                 data: {confirm: "Are you sure you want to delete the user account and all associated articles?"} %>
  </div>
- <% if @user.appointments.empty?  %>
+ <% if !@user.appointments.empty?  %>
    <div class="container">
       <h3 class="text-center mt-4">Записи:</h3>
       <%= render 'appointments/appointment' %>

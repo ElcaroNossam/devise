@@ -45,8 +45,10 @@ class StocksController < ApplicationController
       def update
         if @stock.update(stock_param)
             @stock.namedoctor = current_doctor.name
+            @stock.doctor_id = current_doctor.id
             @appointment = Appointment.find(@stock.appointment_id)           
             @appointment.stock_id = @stock.id
+            
             @appointment.save
             @stock.save
           flash[:notice] = "Запись сохранена!"

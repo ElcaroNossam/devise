@@ -24,23 +24,20 @@
                   <% end %></td>
                
                
-                 <% if current_doctor && !current_doctor.stock_already_tracked?(appointment.id) %>
-                     <td><%= link_to 'Create recomendation', new_stock_path(user_id: appointment.user_id, appointment_id: appointment.id), class: "btn btn-primary", method: :create %></td>  
-                 <% else %> 
-                    <% if doctor_signed_in? || appointment.stock_id %>
+                 <% if doctor_signed_in? && current_doctor && !current_doctor.stock_already_tracked?(appointment.id) %>
+                     <td><%= link_to 'Create recomendation', new_stock_path(user_id: appointment.user_id, appointment_id: appointment.id, doctor_id: current_doctor.id), class: "btn btn-primary", method: :create %></td>  
+                 <% elsif doctor_signed_in? && current_doctor && appointment.stock_id = !nil  %> 
                       <td> <span class="btn btn-danger">                   
                          <%= link_to 'Closed', appointment_path(Appointment.find(appointment.id)), class: "btn btn-danger", method: :delete %>
-                      </span></td> 
-                    <% else %>  
-                      <td> <span class="btn btn-success">                   
-                         <%= link_to 'Open', appointment_path(appointment) %>
-                        </span>
-                        </td> 
-                   <% end %>
+                      </span></td>                     
+                   <% end %>               
+              <% if user_signed_in? && appointment.stock_id == nil %>
+                   <td>  <%= link_to 'Open', appointment_path(appointment),  class: "btn btn-success" %>  </td> 
               <% end %>
-
-
-                 </tr>
+              <% if user_signed_in? && appointment.stock_id != nil %>
+                  <td>  <%= link_to 'Closed', appointment_path(appointment),  class: "btn btn-danger" %>  </td> 
+             <% end %>
+            </tr>
           <% end %>
     </tbody>
    </table>
