@@ -8,7 +8,7 @@
 <% end %>
 
 <div class="container">
- 
+ <% if @stock.user_id %>
     <div class="row justify-content-md-center">
       <div class="col-4 mt-4">
         <div class="card text-center shadow mb-5 bg-white rounded">
@@ -16,11 +16,15 @@
           <strong> Patient: </strong> <%= User.find(@stock.user_id).name %>
           <strong> Doctor: </strong> <%= @stock.namedoctor %>
           <strong> Recomendation: </strong>   <%= @stock.content %>
+          <% unless @stock.picture_url.nil? %><%= image_tag @stock.picture_url %><br /><% end %>
+
+          <%= cl_image_tag(@stock.picture) %>
+      
           </div>
         </div>
       </div>
     </div>
- 
+ <% end %>
 </div>
 
 

@@ -33,6 +33,8 @@ gem 'will_paginate'
 gem 'cancancan', '~> 1.15'
 gem 'devise-bootstrap-views', '~> 1.0'
 gem "font-awesome-rails"
+gem 'cloudinary'
+gem 'fog'
 
 
 # Use Active Storage variant
@@ -47,11 +49,10 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 4.0.1'
   gem 'guard-rspec', require: false
-  gem 'faker', '>= 0'
   gem "factory_bot"
   gem 'guard'
   gem 'minitest-reporters'
-  
+
 end
 
 group :development do

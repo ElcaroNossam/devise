@@ -1,11 +1,13 @@
 class AppointmentsController < ApplicationController
-   before_action :authenticate_user!, only: [:create, :update, :edit ]
+   
   
   before_action :set_appointment, only: [:show, :edit, :update, :destroy]
-  before_action  
+  before_action  :appointment_params, only: [:create, :update]
 
     def new    
       @appointment = Appointment.new
+      
+      
     end
   
     def create
@@ -45,7 +47,9 @@ class AppointmentsController < ApplicationController
     end
     
     def destroy
-      @appointment.destroy 
+      
+      @appointment.destroy
+      
       flash[:notice] = "Запись успешно удалена!"
       if @appointment.doctors.count == 1
         @appointment.doctors.each do |doctor|
@@ -59,6 +63,7 @@ class AppointmentsController < ApplicationController
     private
   
     def set_appointment
+      
       @appointment = Appointment.find(params[:id])
     end
 
