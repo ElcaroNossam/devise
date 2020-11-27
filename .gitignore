@@ -42,3 +42,6 @@ yarn-debug.log*
 
 # Игнорировать файлы Spring
 /spring/*.pid
+
+# Игнорирование загруженных тестовых изображений.
+/public/uploads
