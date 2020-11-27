@@ -16,8 +16,8 @@
           <strong> Patient: </strong> <%= User.find(@stock.user_id).name %>
           <strong> Doctor: </strong> <%= @stock.namedoctor %>
           <strong> Recomendation: </strong>   <%= @stock.content %>
-          <%= cl_image_tag("#{@stock.picture}", :width => 300, :height => 200, :crop => :fill) %>
-      
+          <%= cl_image_tag("#{@stock.picture}", :width => 300, :height => 200, :crop => :fill, :cloud_name => "elcaronossam") %>
+      ),:
           </div>
         </div>
       </div>

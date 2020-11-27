@@ -2,6 +2,7 @@ development:
   cloud_name: "elcaronossam"
   api_key: "212732786479357"
   api_secret: "2N7O4mLYfPxojE1wJeERJZeLb1Q"
+  CLOUDINARY_URL: cloudinary://212732786479357:2N7O4mLYfPxojE1wJeERJZeLb1Q@elcaronossam
 
 
 
@@ -9,5 +10,6 @@ production:
   cloud_name: "elcaronossam"
   api_key: "212732786479357"
   api_secret: "2N7O4mLYfPxojE1wJeERJZeLb1Q"
+  CLOUDINARY_URL: cloudinary://212732786479357:2N7O4mLYfPxojE1wJeERJZeLb1Q@elcaronossam
   
  
