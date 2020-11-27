@@ -34,7 +34,7 @@ gem 'cancancan', '~> 1.15'
 gem 'devise-bootstrap-views', '~> 1.0'
 gem "font-awesome-rails"
 gem 'cloudinary'
-gem 'fog'
+
 
 
 # Use Active Storage variant

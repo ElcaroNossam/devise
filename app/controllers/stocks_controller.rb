@@ -50,20 +50,14 @@ class StocksController < ApplicationController
       end
     
       def update
-      
-
-        if @stock.update(stock_params) 
-          
-
-          Cloudinary::Uploader.upload( params[:stock][:picture])
-              flash[:notice] = "Запись сохранена!"
-            
-                redirect_to current_doctor
-           
-          else
+        if @stock.update(stock_params)  
+           @stock.picture  = Cloudinary::Uploader.upload(params[:stock][:picture])
+                flash[:notice] = "Запись сохранена!"  
+                redirect_to current_doctor 
+        else
          render 'edit' 
         end
-      end
+      end 
     
       def index
       

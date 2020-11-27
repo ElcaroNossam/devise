@@ -16,9 +16,7 @@
           <strong> Patient: </strong> <%= User.find(@stock.user_id).name %>
           <strong> Doctor: </strong> <%= @stock.namedoctor %>
           <strong> Recomendation: </strong>   <%= @stock.content %>
-          <% unless @stock.picture_url.nil? %><%= image_tag @stock.picture_url %><br /><% end %>
-
-          <%= cl_image_tag(@stock.picture) %>
+          <%= cl_image_tag("#{@stock.picture}", :width => 300, :height => 200, :crop => :fill) %>
       
           </div>
         </div>
