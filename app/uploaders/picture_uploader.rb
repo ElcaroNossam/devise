@@ -13,7 +13,7 @@ class PictureUploader < CarrierWave::Uploader::Base
     resize_to_fit(50, 50)
   end
 
-end
+
     # Указывает каталог для хранения загруженных файлов.
     # Разумно оставить значение по умолчанию загрузчикам для монтирования.
     # def store_dir
