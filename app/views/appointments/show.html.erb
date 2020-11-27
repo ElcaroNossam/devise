@@ -11,14 +11,14 @@
   <div class="card text-center shadow mb-5 bg-white rounded">
     <div class="card-header font-italic">
       <strong> Дата приёма: </strong><%= link_to @appointment.data, appointment_path(@appointment), class: "badge badge-pill badge-info mr-1" %>
+      <% if @appointment.stock_id %>
       <strong> Recomendation </strong><%= link_to @appointment.stock_id, stock_path(Stock.find(@appointment.stock_id)), class: "badge badge-pill badge-info mr-1" %>          
-      <strong> Описание проблемы: </strong><%= link_to @appointment.content, appointment_path(@appointment), class: "badge badge-pill badge-info mr-1" %>
-                <strong> Patient: </strong><%= link_to @appointment.user_id, user_path(User.find(@appointment.user_id)), class: "badge badge-pill badge-info mr-1" %>
-                <% @appointment.doctors.each do |doctor| %>
-                    <strong> Phisician: </strong><%= link_to doctor.name, doctor_path(doctor), class: "badge badge-pill badge-info mr-1" %>
-                    
-                <% end %>
-               
+     <% end %>
+        <strong> Описание проблемы: </strong><%= link_to @appointment.content, appointment_path(@appointment), class: "badge badge-pill badge-info mr-1" %>
+        <strong> Patient: </strong><%= link_to @appointment.user_id, user_path(User.find(@appointment.user_id)), class: "badge badge-pill badge-info mr-1" %>
+         <strong> Phisician: </strong> <% @appointment.doctors.each do |doctor| %>
+             <%= link_to doctor.name, doctor_path(doctor), class: "badge badge-pill badge-info mr-1" %>    
+          <% end %>       
     </div>
   </div>
 </div>
