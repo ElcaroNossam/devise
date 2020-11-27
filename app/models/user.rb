@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
         
-         
+         has_many :appointments
          
          validates :number, presence: true, 
                       uniqueness: { case_sensitive: false }, 
