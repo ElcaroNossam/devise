@@ -25,3 +25,4 @@ Things you may want to cover:
 
 <% unless @stock.picture_url.nil? %><%= image_tag @stock.picture_url %><br /><% end %>
 # clinican
+# clinicani
